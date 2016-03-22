@@ -137,7 +137,40 @@ Polls is a simple API allowing consumers to view polls and vote in them.
             }
         ]
         
-        
+### Order Post [POST]
+
+
++ Request (application/json)
+
+        {
+            "name": "Tim Cook",
+            "orderTime": "Monday, January 28, 2016 12:38PM",
+            "order": [
+                    {
+                        "name": "Spring rolls",
+                        "quantity": 1
+                    },
+                    {
+                        "name": "Fried Rice",
+                        "quantity": 2
+                    },
+                    {
+                        "name": "Green Tea Ic Cream",
+                        "quantity": 1
+                    }
+                ]
+        }
+
++ Response 201 (application/json)
+
+        {
+            "name": "Tim Cook",
+            "orderTime": "Monday, January 28, 2016 12:38PM",
+            "estimatedCompletion":  "Monday, January 28, 2016 12:58PM"
+        }
+
+
+
 
 ## Order Item [/orders/{orderNumber}]
 
