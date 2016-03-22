@@ -1,80 +1,169 @@
 FORMAT: 1A
-HOST: http://polls.apiblueprint.org/
 
-# thaiMenu
+#thaimenu
 
 Polls is a simple API allowing consumers to view polls and vote in them.
 
-## Questions Collection [/questions]
+## Menu Collection [/menu]
 
-### List All Questions [GET]
+### List Menu [GET]
 
 + Response 200 (application/json)
 
         [
             {
-                "question": "Favourite programming language?",
-                "published_at": "2015-08-05T08:40:51.620Z",
-                "choices": [
-                    {
-                        "choice": "Swift",
-                        "votes": 2048
-                    }, {
-                        "choice": "Python",
-                        "votes": 1024
-                    }, {
-                        "choice": "Objective-C",
-                        "votes": 512
-                    }, {
-                        "choice": "Ruby",
-                        "votes": 256
-                    }
-                ]
-            }
+               "name": "Spring Rolls",
+               "price": 6,
+               "description": "These yummy cylinders will have you on the floor begging for more (Vegi)",
+               "quantity": 0,
+               "category":"apps"
+            },
+            {
+               "name": "Egg Rolls",
+               "price": 6.5,
+               "description": "These meat filled yummy cylinders will also have you on the floor begging for more",
+               "quantity": 0,
+               "category":"apps"
+            },
+            {
+               "name": "Edamame",
+               "price": 5,
+               "description": "Green pods that contain magical little bean. they will make your mom want to marry a guy named ed so you can constintly yell 'ED and MOMMY!' (Vegi)",
+               "quantity": 0,
+               "category":"apps"
+            },
+            {
+               "name": "Chicken Pad Thai",
+               "price": 12,
+               "description": "Worm like noodles that taste nothing like worms and more like heaven. Be warned, it has enough spice to it, to give you the farts for weeks but dont let deter you from picking this tasty meal",
+               "quantity": 0,
+               "category":"entrees"
+            },
+            {
+               "name": "Fried Rice (Choice of Meat)",
+               "price": 10,
+               "description": "Choose from chicken, beef, shrimp, tofu, or vegetables. then be ready to eat a mountain of fried rice mixed with onions, carrots and eggs (Vegi)",
+               "quantity": 0,
+               "category":"entrees"
+            },
+            {
+               "name": "Thai Soup w/ side of Dumplings",
+               "price": 8.5,
+               "description": "A scrumptious twist on your mamas chicken noodle soup, and you get dumplings. Dont be a dingus and get the soup and dumplings! (Vegi)",
+               "quantity": 0,
+               "category":"entrees"
+            },
+            {
+               "name": "Green Tea Ice Cream",
+               "price": 4,
+               "description": "Imagine the best green tea youve ever had and multiply it by 100 and then add a hint of sugar and add some ice and guess what you dont have our green tea ice cream because ours will be way better because we add our secret recipe and make it in our secret ice cream room.",
+               "quantity": 0,
+               "category":"desserts"
+            },
+            {
+               "name": "Sticky Rice",
+               "price": 5,
+               "description": "The Stickiest gosh dang rice you will ever have! Guaranteed",
+               "quantity": 0,
+               "category":"desserts"
+            },
+            
         ]
 
-### Create a New Question [POST]
+## Menu Item [/menu/{name}]
 
-You may create your own question using this action. It takes a JSON
-object containing a question and a collection of answers in the
-form of choices.
++ Parameters
+    + name (string) - Name of menu item you want to fetch
+    
+### Item [GET]
 
-+ Request (application/json)
++ Response 200 (application/json)    
+    
+            {
+               "name": "Spring Rolls",
+               "price": 6,
+               "description": "These yummy cylinders will have you on the floor begging for more (Vegi)",
+               "quantity": 0,
+               "category":"apps"
+            }
+            
+            
+            
+            
+## Order Collection [/orders]            
+
+### Order List [GET]
+
++ Response 200 (application/json)    
+
+        [
+            {
+                "name": "Joe Smith",
+                "orderTime": "Monday, January 28, 2016 12:34PM",
+                "order": [
+                    {
+                        "name": "Sping rolls",
+                        "quantity": 2
+                    },
+                    {
+                        "name": "Pad Thai",
+                        "quantity": 1
+                    },
+                    {
+                        "name": "Sticky Rice",
+                        "quantity": 1
+                    }
+                ],
+                "orderNumber": 1
+            },
+            {
+                "name": "Sussy Jonson",
+                "orderTime": "Monday, January 28, 2016 12:38PM",
+                "order": [
+                    {
+                        "name": "Egg rolls",
+                        "quantity": 2
+                    },
+                    {
+                        "name": "Fried Rice",
+                        "quantity": 2
+                    },
+                    {
+                        "name": "Sticky Rice",
+                        "quantity": 1
+                    }
+                ],
+                "orderNumber": 2
+            }
+        ]
+        
+        
+
+## Order Item [/orders/{orderNumber}]
+
++ Parameters
+    + orderNumber (number) - Number of you want to fetch
+    
+### Order [GET]
+
++ Response 200 (application/json) 
 
         {
-            "question": "Favourite programming language?",
-            "choices": [
-                "Swift",
-                "Python",
-                "Objective-C",
-                "Ruby"
-            ]
-        }
-
-+ Response 201 (application/json)
-
-    + Headers
-
-            Location: /questions/2
-
-    + Body
-
-            {
-                "question": "Favourite programming language?",
-                "published_at": "2015-08-05T08:40:51.620Z",
-                "choices": [
+                "name": "Sussy Jonson",
+                "orderTime": "Monday, January 28, 2016 12:38PM",
+                "order": [
                     {
-                        "choice": "Swift",
-                        "votes": 0
-                    }, {
-                        "choice": "Python",
-                        "votes": 0
-                    }, {
-                        "choice": "Objective-C",
-                        "votes": 0
-                    }, {
-                        "choice": "Ruby",
-                        "votes": 0
+                        "name": "Egg rolls",
+                        "quantity": 2
+                    },
+                    {
+                        "name": "Fried Rice",
+                        "quantity": 2
+                    },
+                    {
+                        "name": "Sticky Rice",
+                        "quantity": 1
                     }
-                ]
+                ],
+                "orderNumber": 2
             }
